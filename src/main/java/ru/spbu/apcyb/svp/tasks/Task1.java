@@ -100,31 +100,8 @@ public class Task1 {
    * @param arr массив для обработки.
    * @return отсортированный массив без повторяющихся элементов .
    */
-  public static long[] order(long[] arr) {
-    Arrays.sort(arr);
-    return Arrays.stream(arr).distinct().toArray();
-  }
-
-  /**
-   * Убираем неположительные номиналы и те, что больше заданной суммы.
-   *
-   * @param coins массив номиналов .
-   * @param sum   сумма.
-   * @return обработанный массив.
-   */
-
-  public static long[] deleteUselessElements(long[] coins, long sum) {
-    int i;
-    for (i = coins.length - 1; i > 0; i--) {
-      if (coins[i] <= sum) {
-        break;
-      }
-    }
-    if (coins[i] > sum) {
-      logger.log(Level.INFO, "Все номиналы больше суммы;");
-      return new long[1];
-    }
-    return Arrays.copyOfRange(coins, 0, i + 1);
+  public static long[] order(long[] arr, long sum) {
+    return Arrays.stream(arr).distinct().sorted().filter(n -> n <= sum).toArray();
   }
 
   /**
@@ -145,7 +122,6 @@ public class Task1 {
     logger.log(Level.INFO, "\n");
   }
 
-
   /**
    * Поиск комбинаций.
    *
@@ -157,7 +133,6 @@ public class Task1 {
    * @param num          Счётчик размена .
    * @return Номер размена.
    */
-
   public static int searchOfOptions(long sum, long tempSum, long[] coins, long[] numberOfUses,
       int index, int num) {
     long div = sum / coins[index];
@@ -177,7 +152,7 @@ public class Task1 {
   }
 
   /**
-   * Мэйн .
+   * Мэйн.
    *
    * @param args вспомгательный аргумент .
    */
@@ -186,8 +161,7 @@ public class Task1 {
     long sum = enterSum();
     long amountOfCoins = enterAmount();
     long[] coins = enterCoins(amountOfCoins);
-    coins = order(coins);
-    coins = deleteUselessElements(coins, sum);
+    coins = order(coins, sum);
     long[] numberOfUses = new long[coins.length];
     searchOfOptions(sum, sum, coins, numberOfUses, 0, 0);
   }

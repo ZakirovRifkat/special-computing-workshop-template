@@ -70,7 +70,7 @@ class Task1Test {
   @Test
   void order() {
     long[] arr = {5, 22, 22, 0, -5, 0, 0, 0, 7, 5};
-    long[] actual = Task1.order(arr);
+    long[] actual = Task1.order(arr, 22);
     long[] expected = {-5, 0, 5, 7, 22};
     assertArrayEquals(expected, actual);
   }
@@ -78,24 +78,8 @@ class Task1Test {
   @Test
   void order1() {
     long[] arr = {};
-    long[] actual = Task1.order(arr);
+    long[] actual = Task1.order(arr, 5);
     long[] expected = {};
-    assertArrayEquals(expected, actual);
-  }
-
-  @Test
-  void deleteUselessElements() {
-    long[] coins = {1, 5, 6};
-    long[] actual = Task1.deleteUselessElements(coins, 2);
-    long[] expected = {1};
-    assertArrayEquals(expected, actual);
-  }
-
-  @Test
-  void deleteUselessElements1() {
-    long[] coins = {4, 5, 6};
-    long[] actual = Task1.deleteUselessElements(coins, 1);
-    long[] expected = {0};
     assertArrayEquals(expected, actual);
   }
 
